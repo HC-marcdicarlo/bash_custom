@@ -34,7 +34,7 @@ else
 fi
 }
 
-PS1="${LIGHTGRAY}$(printf -vch "%${COLUMNS}s" "${dts}"; printf "%s" "${ch// /-}")\
+PS1="${LIGHTGRAY}$(printf "%${COLUMNS}s" "${dts}")\
 ${RESET}$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET}\
 ${nl} ${CYAN}->${RESET} "
 export PS1
