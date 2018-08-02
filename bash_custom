@@ -1,4 +1,4 @@
-RESTORE='\033[0m'
+RESET=$(tput sgr0)
 
 RED='\033[00;31m'
 GREEN='\033[00;32m'
@@ -15,3 +15,21 @@ LBLUE='\033[01;34m'
 LPURPLE='\033[01;35m'
 LCYAN='\033[01;36m'
 WHITE='\033[01;37m'
+hname='\H'
+usr='\u'
+nl='\n'
+
+function ret_thing(){
+if [ $? = 0 ]; then 
+  printf  "\033[01;32m* ^_^$(tput sgr0)"
+else 
+  printf "\033[00;31mx O_o$(tput sgr0)"
+fi
+}
+
+dts=$(date +"-- %a %d-%b-%Y %I:%M %p ")
+
+PS1="${LIGHTGRAY}$(printf -vch "%${COLUMNS}s" "${dts}"; printf "%s" "${ch// /-}")\
+${RESET}$(ret_thing) ${LGREEN}[${usr} ${LPURPLE}@${hname}${RESET}${LGREEN}]${RESET} ${BLUE}\w${RESET} \
+${nl} ${CYAN}->${RESET} "
+export PS1
