@@ -1,5 +1,4 @@
-RESET=$(tput sgr0)
-
+#define colors
 RED='\033[00;31m'
 GREEN='\033[00;32m'
 YELLOW='\033[00;33m'
@@ -15,9 +14,17 @@ LBLUE='\033[01;34m'
 LPURPLE='\033[01;35m'
 LCYAN='\033[01;36m'
 WHITE='\033[01;37m'
+
+RESET=$(tput sgr0)
+
 hname='\H'
 usr='\u'
 nl='\n'
+usr_color=${LGREEN}
+
+dts=$(date +"-- %a %d-%b-%Y %I:%M %p ")
+
+[[ $UID == 0 ]] && usr_color=${RED}
 
 function ret_thing(){
 if [ $? = 0 ]; then 
@@ -27,9 +34,7 @@ else
 fi
 }
 
-dts=$(date +"-- %a %d-%b-%Y %I:%M %p ")
-
 PS1="${LIGHTGRAY}$(printf -vch "%${COLUMNS}s" "${dts}"; printf "%s" "${ch// /-}")\
-${RESET}$(ret_thing) ${LGREEN}[${usr} ${LPURPLE}@${hname}${RESET}${LGREEN}]${RESET} ${BLUE}\w${RESET} \
+${RESET}$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET}\
 ${nl} ${CYAN}->${RESET} "
 export PS1
