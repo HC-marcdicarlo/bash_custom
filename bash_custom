@@ -22,7 +22,7 @@ usr='\u'
 nl='\n'
 usr_color=${LGREEN}
 
-dts=$(date +"-- %a %d-%b-%Y %I:%M %p ")
+dts=$(date +"%d-%b-%Y %I:%M %p ")
 
 [[ $UID == 0 ]] && usr_color=${RED}
 
@@ -34,7 +34,11 @@ else
 fi
 }
 
-PS1="${LIGHTGRAY}$(printf "%${COLUMNS}s\n" "${dts}")\
-${RESET}$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET}\
+#PS1="${LIGHTGRAY}$(printf "%${COLUMNS}s\n" "${dts}")\
+#${RESET}$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET}\
+#${nl} ${CYAN}->${RESET} "
+#export PS1
+
+PS1="$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET} ${CYAN}||${RESET} ${LIGHTGRAY}${dts}${RESET}\
 ${nl} ${CYAN}->${RESET} "
 export PS1
