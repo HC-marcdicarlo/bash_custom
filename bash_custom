@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #define colors
 RED='\033[00;31m'
 GREEN='\033[00;32m'
@@ -17,28 +19,30 @@ WHITE='\033[01;37m'
 
 RESET=$(tput sgr0)
 
-hname='\H'
+hname='@\H'
 usr='\u'
 nl='\n'
 usr_color=${LGREEN}
+wrk_dir='\w'
 
 dts=$(date +"%d-%b-%Y %I:%M %p ")
 
 [[ $UID == 0 ]] && usr_color=${RED}
 
+
 function ret_thing(){
-if [ $? = 0 ]; then 
-  printf  "\033[01;32m* ^_^$(tput sgr0)"
-else 
-  printf "\033[00;31mx O_o$(tput sgr0)"
-fi
+
+  if [[ $? -eq 0 ]]; then 
+    printf  "${LGREEN}* ^_^${RESET}"
+  else 
+    printf "${RED}x O_o${RESET}"
+  fi
 }
 
-#PS1="${LIGHTGRAY}$(printf "%${COLUMNS}s\n" "${dts}")\
-#${RESET}$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET}\
-#${nl} ${CYAN}->${RESET} "
-#export PS1
+#export PS1="${LIGHTGRAY}`printf "%${COLUMNS}s\n" "${dts}"`\`ret_thing\`${RESET} \
+#${CYAN}|| ${RESET}${usr_color}${usr}${RESET} ${LPURPLE}${hname}${RESET}${CYAN} \
+#||${RESET} ${BLUE}${wrk_dir}${RESET} ${LIGHTGRAY}${RESET}${nl} ${CYAN}->${RESET} "
 
-PS1="$(ret_thing)${CYAN} || ${usr_color}${usr} ${LPURPLE}@${hname}${RESET}${CYAN} ||${RESET} ${BLUE}\w${RESET} ${CYAN}||${RESET} ${LIGHTGRAY}${dts}${RESET}\
-${nl} ${CYAN}->${RESET} "
-export PS1
+export PS1="${LIGHTGRAY}`printf -vch "%${COLUMNS}s" "${dts}"; printf "%s" "${ch// /-}"`${RESET}\`ret_thing\`${RESET} \
+${CYAN}|| ${RESET}${usr_color}${usr}${RESET} ${LPURPLE}${hname}${RESET}${CYAN} \
+||${RESET} ${BLUE}${wrk_dir}${RESET} ${LIGHTGRAY}${RESET}${nl} ${CYAN}->${RESET} "
