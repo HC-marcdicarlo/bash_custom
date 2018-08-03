@@ -31,7 +31,6 @@ dts=$(date +"%d-%b-%Y %I:%M %p ")
 
 
 function ret_thing(){
-
   if [[ $? -eq 0 ]]; then 
     printf  "${LGREEN}* ^_^${RESET}"
   else 
